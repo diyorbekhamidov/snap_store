@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.search.SearchFragment">
+
+    <FrameLayout
+        android:id="@+id/searchProductsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+       <androidx.core.widget.NestedScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:paddingTop="65dp"
+               android:paddingBottom="?actionBarSize">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/searchProductsRv"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   tools:listitem="@layout/product_view"
+                   android:overScrollMode="never"
+                   app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                   app:spanCount="2" />
+
+           </LinearLayout>
+
+       </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/productSearchView"
+            style="@style/SearchViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:defaultQueryHint="Type to search products"
+            app:iconifiedByDefault="false" />
+
+    </FrameLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

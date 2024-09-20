@@ -16,6 +16,8 @@ import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.presentation.adapter.CartsAdapter
 import com.bounce.snapstore.presentation.vm.CartsViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
@@ -35,6 +37,11 @@ class CartsFragment : Fragment() {
         cartsViewModel = ViewModelProvider(this, viewModelFactory)[CartsViewModel::class.java]
 
 
+        binding.buyNowBtn.setOnClickListener {
+            Snackbar.make(it, "This app for test", Snackbar.LENGTH_SHORT).setAnimationMode(
+                BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+            ).show()
+        }
 
         cartsViewModel.getProductsLiveData().observe(viewLifecycleOwner) {
 

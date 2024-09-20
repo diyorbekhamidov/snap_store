@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -19,12 +17,10 @@ import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.CategoryData
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.domain.model.SalesData
-import com.bounce.snapstore.presentation.MainActivity
 import com.bounce.snapstore.presentation.adapter.CategoryAdapter
 import com.bounce.snapstore.presentation.adapter.ProductAdapter
 import com.bounce.snapstore.presentation.adapter.SalesPagerAdapter
 import com.bounce.snapstore.presentation.vm.HomeViewModel
-import com.bounce.snapstore.presentation.vm.ViewModelFactory
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
@@ -60,7 +56,7 @@ class HomeFragment : Fragment() {
 
         (requireActivity().application as MyApplication).networkComponent.inject(this)
         homeViewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
-        binding.salesViewPager.adapter = SalesPagerAdapter(salesList)
+        binding.salesViewPager.adapter = SalesPagerAdapter(salesList, salesClickListener)
 
         binding.categoryRv.adapter =
             CategoryAdapter(categoryList, object : CategoryAdapter.CategoryClickListener {
@@ -141,6 +137,14 @@ class HomeFragment : Fragment() {
             val b = Bundle()
             val id = productData.id
             b.putInt("product_id", id)
+            findNavController().navigate(R.id.navigation_product, b)
+        }
+    }
+
+    private val salesClickListener = object : SalesPagerAdapter.ItemClickListener {
+        override fun onClick(position: Int) {
+            val b = Bundle()
+            b.putInt("product_id", position + 1)
             findNavController().navigate(R.id.navigation_product, b)
         }
     }

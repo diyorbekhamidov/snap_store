@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bounce.snapstore.domain.model.SalesData
 import com.bounce.snapstore.databinding.SalesPagerViewBinding
+import com.bounce.snapstore.domain.model.SalesData
 
-class SalesPagerAdapter(private val salesList: List<SalesData>) :
+class SalesPagerAdapter(
+    private val salesList: List<SalesData>,
+    private val itemClickListener: ItemClickListener
+) :
     RecyclerView.Adapter<SalesPagerAdapter.Vh>() {
 
     inner class Vh(private val binding: SalesPagerViewBinding) :
@@ -17,7 +20,12 @@ class SalesPagerAdapter(private val salesList: List<SalesData>) :
             binding.apply {
                 titleSalesTv.text = salesList[position].title
                 imgSales.setImageResource(salesList[position].image)
-                salesPagerCard.setBackgroundColor(ContextCompat.getColor(binding.root.context, salesList[position].color))
+                salesPagerCard.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        salesList[position].color
+                    )
+                )
             }
         }
 
@@ -31,5 +39,12 @@ class SalesPagerAdapter(private val salesList: List<SalesData>) :
 
     override fun onBindViewHolder(holder: Vh, position: Int) {
         holder.onBind(position)
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(position)
+        }
+    }
+
+    interface ItemClickListener {
+        fun onClick(position: Int)
     }
 }

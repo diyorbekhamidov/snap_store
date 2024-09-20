@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.profile.ProfileFragment">
+    android:orientation="vertical"
+    tools:context=".presentation.ui.profile.ProfileFragment"
+    android:layout_marginBottom="?actionBarSize">
 
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Profile screen"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/btnQuit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.06"
+        android:stateListAnimator="@null"
+        android:background="@drawable/custom_background_button"
+        android:text="Quit app"
+        android:textAllCaps="false" />
+
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.bounce.snapstore.MyApplication
 import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentProductBinding
+import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.presentation.vm.ProductViewModel
 import com.bumptech.glide.Glide
@@ -61,8 +63,19 @@ class ProductFragment : Fragment() {
                     }
 
                     it.isFailure -> {
-                        productMainLayout.isVisible = true
-                        productProgress.isVisible = false
+                        if (!NetworkHelper.isConnected(requireContext())) {
+                            binding.apply {
+                                productProgress.isVisible = false
+                                productMainLayout.isVisible = true
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.exceptionOrNull()?.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigate(R.id.navigation_failure)
+
+                            }
+                        }
                     }
                 }
             }
@@ -91,13 +104,8 @@ class ProductFragment : Fragment() {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String) =
-            ProductFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        productViewModel.fetchProductData(param1 ?: 1)
     }
 }

@@ -1,8 +1,8 @@
-# SnapStore app download from Play Store 
-[![Play Store](https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg)](https://play.google.com/store/apps/details?id=com.bounce.snapstore) 
-
+# Download SnapStore APK file
 
 ![AppIcon](app/src/main/res/mipmap-xhdpi/ic_launcher.webp)
+
+[Download APK](https://github.com/diyorbekhamidov/snap_store/blob/main/apk/snap-store-release.apk)
 
 ## Screenshots
 

@@ -1,3 +1,7 @@
+# Used Technologies
+Kotlin, Clean Architecture, MVVM, RxJava, Retrofit, Dagger2 
+
+
 # Download SnapStore APK file
 
 ![AppIcon](app/src/main/res/mipmap-xhdpi/ic_launcher.webp)

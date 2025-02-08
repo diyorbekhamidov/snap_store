@@ -1,8 +1,8 @@
 package com.bounce.snapstore
 
 import android.app.Application
-import com.bounce.snapstore.di.component.DaggerNetworkComponent
 import com.bounce.snapstore.di.component.NetworkComponent
+import com.bounce.snapstore.di.component.DaggerNetworkComponent
 
 class MyApplication : Application() {
 

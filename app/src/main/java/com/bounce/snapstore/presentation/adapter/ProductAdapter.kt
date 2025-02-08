@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 class ProductAdapter(private var productList: List<ProductData>, private val itemClickListener: ItemClickListener) :
     RecyclerView.Adapter<ProductAdapter.Vh>() {
 
-
     inner class Vh(private val binding: ProductViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

@@ -2,7 +2,7 @@
 
 ![AppIcon](app/src/main/res/mipmap-xhdpi/ic_launcher.webp)
 
-[Download APK](https://github.com/diyorbekhamidov/snap_store/blob/main/apk/snap-store-release.apk)
+[Download APK](apk/snap-store-release.apk)
 
 ## Screenshots
 

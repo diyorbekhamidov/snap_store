@@ -56,7 +56,7 @@ class CartsFragment : Fragment() {
                 }
 
                 it.isFailure -> {
-                    if (!NetworkHelper.isConnected(requireContext())) {
+                    if (!NetworkHelper.isNetworkConnected(requireContext())) {
                         Toast.makeText(
                             requireContext(),
                             "Something went wrong ${it.exceptionOrNull()?.message}",

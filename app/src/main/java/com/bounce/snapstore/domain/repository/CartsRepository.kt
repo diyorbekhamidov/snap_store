@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface CartsRepository {
 
-    fun getCarts(): Single<List<ProductCartData>>
+    fun getProductCarts(): Single<List<ProductCartData>>
 }

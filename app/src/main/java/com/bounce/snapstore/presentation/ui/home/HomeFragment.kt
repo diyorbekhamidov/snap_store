@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
             }
 
             it.isFailure -> {
-                if (!NetworkHelper.isConnected(requireContext())) {
+                if (!NetworkHelper.isNetworkConnected(requireContext())) {
                     binding.apply {
                         progressProducts.isVisible = false
                         homeMainLayout.isVisible = true

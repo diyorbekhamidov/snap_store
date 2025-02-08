@@ -5,25 +5,30 @@ import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.domain.repository.CartsRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import java.util.Collections
 import javax.inject.Inject
 
 class CartsUseCase @Inject constructor(
-    val cartsRepository: CartsRepository,
+    private val cartsRepository: CartsRepository,
     val productUseCase: ProductUseCase
 ) {
+    fun getProductCarts(): Single<Pair<List<ProductCartData>, List<ProductData>>> {
+        return cartsRepository.getProductCarts()
+            .flatMap { productCartsList ->
 
-    fun getCarts(): Single<Pair<List<ProductCartData>, List<ProductData>>> {
-        return cartsRepository.getCarts().flattenAsObservable { it }
-            .flatMapSingle { productCarts ->
-                Observable.fromIterable(productCarts.products)
-                    .flatMapSingle { product ->
-                        productUseCase.getProductById(product.productId)
-                    }.toList().map { products -> productCarts to products }
-            }.toList().map { pairs ->
-                val carts = pairs.map { it.first }
-                val products = pairs.flatMap { it.second }
-                Pair(carts, products)
+                val productSingles = productCartsList.map { cart ->
+                    Single.zip(
+                        cart.products.map { productUseCase.getProductById(it.productId) }
+                    ) { productsArray ->
+                        cart to productsArray.map { it as ProductData }
+                    }
+                }
+
+                Single.zip(productSingles) { pairsArray ->
+                    val pairs = pairsArray.map { it as Pair<ProductCartData, List<ProductData>> }
+                    val carts = pairs.map { it.first }
+                    val products = pairs.flatMap { it.second }
+                    carts to products
+                }
             }
     }
 }

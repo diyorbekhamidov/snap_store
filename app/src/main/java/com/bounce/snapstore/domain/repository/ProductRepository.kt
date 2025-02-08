@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface ProductRepository {
 
-    fun getProducts(): Single<List<ProductData>>
+    fun getAllProducts(): Single<List<ProductData>>
 
     fun getProductById(id: Int): Single<ProductData>
 }

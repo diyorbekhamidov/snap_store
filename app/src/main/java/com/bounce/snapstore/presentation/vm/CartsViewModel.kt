@@ -24,7 +24,7 @@ class CartsViewModel @Inject constructor(
 
      fun fetchAllCarts() {
         Log.d(TAG, "fetchAllCarts: ")
-        val d = cartsUseCase.getCarts()
+        val d = cartsUseCase.getProductCarts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

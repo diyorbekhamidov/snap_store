@@ -1,16 +1,11 @@
 package com.bounce.snapstore.presentation.ui.failure
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentFailureBinding
 import com.bounce.snapstore.domain.NetworkHelper
 import com.google.android.material.snackbar.Snackbar
@@ -38,7 +33,7 @@ class FailureFragment : Fragment() {
         binding = FragmentFailureBinding.inflate(inflater, container, false)
 
         binding?.buttonTryAgain?.setOnClickListener {
-            if (NetworkHelper.isConnected(requireContext())) {
+            if (NetworkHelper.isNetworkConnected(requireContext())) {
                 findNavController().popBackStack()
             } else {
                 Snackbar.make(binding!!.root, "No Internet Connection", Snackbar.LENGTH_SHORT)

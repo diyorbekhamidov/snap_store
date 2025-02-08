@@ -1,4 +1,4 @@
-package com.bounce.snapstore.presentation.di.module
+package com.bounce.snapstore.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

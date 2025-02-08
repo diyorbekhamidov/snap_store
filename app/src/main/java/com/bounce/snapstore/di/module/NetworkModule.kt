@@ -1,6 +1,6 @@
-package com.bounce.snapstore.presentation.di.module
+package com.bounce.snapstore.di.module
 
-import com.bounce.snapstore.data.network.ApiService
+import com.bounce.snapstore.data.network.ProductApiService
 import com.bounce.snapstore.data.repository.CartsRepositoryImpl
 import com.bounce.snapstore.data.repository.ProductRepositoryImpl
 import com.bounce.snapstore.domain.repository.CartsRepository
@@ -50,13 +50,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ProductApiService {
+        return retrofit.create(ProductApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideProductRepository(apiService: ApiService): ProductRepository {
+    fun provideProductRepository(apiService: ProductApiService): ProductRepository {
         return ProductRepositoryImpl(apiService)
     }
 
@@ -68,7 +68,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCartsRepository(apiService: ApiService): CartsRepository {
+    fun provideCartsRepository(apiService: ProductApiService): CartsRepository {
         return CartsRepositoryImpl(apiService)
     }
 

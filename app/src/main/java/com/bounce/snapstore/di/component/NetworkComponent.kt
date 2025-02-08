@@ -1,11 +1,11 @@
-package com.bounce.snapstore.presentation.di.component
+package com.bounce.snapstore.di.component
 
 import android.app.Application
 import androidx.fragment.app.Fragment
 import com.bounce.snapstore.MyApplication
 import com.bounce.snapstore.presentation.MainActivity
-import com.bounce.snapstore.presentation.di.module.NetworkModule
-import com.bounce.snapstore.presentation.di.module.ViewModelModule
+import com.bounce.snapstore.di.module.NetworkModule
+import com.bounce.snapstore.di.module.ViewModelModule
 import com.bounce.snapstore.presentation.ui.carts.CartsFragment
 import com.bounce.snapstore.presentation.ui.home.HomeFragment
 import com.bounce.snapstore.presentation.ui.product.ProductFragment

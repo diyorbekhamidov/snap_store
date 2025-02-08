@@ -50,7 +50,7 @@ class SearchFragment : Fragment() {
                 }
 
                 it.isFailure -> {
-                    if (!NetworkHelper.isConnected(requireContext())) {
+                    if (!NetworkHelper.isNetworkConnected(requireContext())) {
                         binding?.apply {
                             searchProductsLayout.isVisible = true
                             progress.isVisible = false

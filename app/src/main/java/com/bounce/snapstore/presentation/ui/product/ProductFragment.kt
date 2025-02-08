@@ -63,7 +63,7 @@ class ProductFragment : Fragment() {
                     }
 
                     it.isFailure -> {
-                        if (!NetworkHelper.isConnected(requireContext())) {
+                        if (!NetworkHelper.isNetworkConnected(requireContext())) {
                             binding.apply {
                                 productProgress.isVisible = false
                                 productMainLayout.isVisible = true

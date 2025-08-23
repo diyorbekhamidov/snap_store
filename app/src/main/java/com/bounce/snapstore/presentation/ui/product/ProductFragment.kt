@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +16,6 @@ import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentProductBinding
 import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
-import com.bounce.snapstore.presentation.vm.ProductViewModel
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
@@ -34,18 +35,33 @@ class ProductFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var productViewModel: ProductViewModel
+    private lateinit var productViewModel: ProductViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProductBinding.inflate(inflater, container, false)
         (requireActivity().application as MyApplication).networkComponent.inject(this)
+        binding = FragmentProductBinding.inflate(inflater, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.productScreenLinearLayout) { view, insets ->
+
+            val systemBarInsets =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+
+            view.setPadding(
+                systemBarInsets.left,
+                systemBarInsets.top,
+                systemBarInsets.right,
+                systemBarInsets.bottom,
+            )
+            insets
+        }
+
         productViewModel = ViewModelProvider(this, viewModelFactory)[ProductViewModel::class.java]
 
 
-        //BACK
+        //Back btn
         binding.backBtn.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -58,7 +74,7 @@ class ProductFragment : Fragment() {
                     it.isSuccess -> {
                         productData = it.getOrNull()!!
                         setUI(productData)
-                        productMainLayout.isVisible = true
+                        productScreenLinearLayout.isVisible = true
                         productProgress.isVisible = false
                     }
 
@@ -66,7 +82,7 @@ class ProductFragment : Fragment() {
                         if (!NetworkHelper.isNetworkConnected(requireContext())) {
                             binding.apply {
                                 productProgress.isVisible = false
-                                productMainLayout.isVisible = true
+                                productScreenLinearLayout.isVisible = true
                                 Toast.makeText(
                                     requireContext(),
                                     it.exceptionOrNull()?.message,

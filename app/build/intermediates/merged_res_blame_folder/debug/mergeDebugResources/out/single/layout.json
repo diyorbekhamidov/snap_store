@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_search.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_search.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_product.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_product.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_carts.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_carts.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_profile.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/activity_main.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_home.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/back_button_layout.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/back_button_layout.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/fragment_failure.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/fragment_failure.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/product_view.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/product_view.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/sales_pager_view.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/sales_pager_view.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/product_carts_view.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/product_carts_view.xml"
+    },
+    {
+        "merged": "com.bounce.snapstore.app-mergeDebugResources-50:/layout/category_view.xml",
+        "source": "com.bounce.snapstore.app-main-53:/layout/category_view.xml"
+    }
+]

@@ -35,7 +35,7 @@ class CategoryAdapter(
                     categoryCard.setBackgroundColor(
                         ContextCompat.getColor(
                             binding.root.context,
-                            R.color.purple_500
+                            R.color.orange_500
                         )
                     )
                 } else {

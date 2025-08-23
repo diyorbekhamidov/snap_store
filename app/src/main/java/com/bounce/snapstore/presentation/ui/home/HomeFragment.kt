@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,19 +24,18 @@ import com.bounce.snapstore.domain.model.SalesData
 import com.bounce.snapstore.presentation.adapter.CategoryAdapter
 import com.bounce.snapstore.presentation.adapter.ProductAdapter
 import com.bounce.snapstore.presentation.adapter.SalesPagerAdapter
-import com.bounce.snapstore.presentation.vm.HomeViewModel
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    val salesList = listOf(
+    private val salesList = listOf(
         SalesData("30% OFF ON FIRST ORDER", R.drawable.shop1, R.color.purple_200),
         SalesData("15% OFF DURING THE WEEKEND", R.drawable.shop2, R.color.teal_700),
-        SalesData("20% OFF ON SECOND ORDER", R.drawable.shop3, R.color.purple_500)
+        SalesData("20% OFF ON SECOND ORDER", R.drawable.shop3, R.color.orange_500)
     )
 
-    val categoryList = listOf(
+    private val categoryList = listOf(
         CategoryData("all", true),
         CategoryData("electronics", false),
         CategoryData("jewelery", false),
@@ -51,17 +54,35 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity().application as MyApplication).networkComponent.inject(this)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        (requireActivity().application as MyApplication).networkComponent.inject(this)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.homeLinearLayout) { view, insets ->
+
+            val systemBarInsets =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+
+            view.setPadding(
+                systemBarInsets.left,
+                systemBarInsets.top,
+                systemBarInsets.right,
+                systemBarInsets.bottom,
+            )
+
+            view.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = systemBarInsets.bottom + (systemBarInsets.bottom / 2)
+            }
+            insets
+        }
+
         homeViewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         binding.salesViewPager.adapter = SalesPagerAdapter(salesList, salesClickListener)
 
         binding.categoryRv.adapter =
             CategoryAdapter(categoryList, object : CategoryAdapter.CategoryClickListener {
                 override fun onClick(categoryData: CategoryData) {
-                    if (categoryData.category.equals("all")) {
+                    if (categoryData.category == "all") {
                         productAdapter.filteredList(
                             homeViewModel.getProductsLiveData().value?.getOrNull() ?: emptyList()
                         )
@@ -98,7 +119,6 @@ class HomeFragment : Fragment() {
         }
 
 
-
         return root
     }
 
@@ -109,16 +129,16 @@ class HomeFragment : Fragment() {
                     productAdapter =
                         ProductAdapter(it.getOrNull() ?: emptyList(), productItemClickListener)
                     productsRv.adapter = productAdapter
-                    progressProducts.isVisible = false
-                    homeMainLayout.isVisible = true
+                    progress.isVisible = false
+                    homeNestedScrollView.isVisible = true
                 }
             }
 
             it.isFailure -> {
                 if (!NetworkHelper.isNetworkConnected(requireContext())) {
                     binding.apply {
-                        progressProducts.isVisible = false
-                        homeMainLayout.isVisible = true
+                        progress.isVisible = false
+                        homeNestedScrollView.isVisible = true
                         Toast.makeText(
                             requireContext(),
                             it.exceptionOrNull()?.message,
@@ -152,10 +172,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onResume() {
-        super.onResume()
-        homeViewModel.fetchHomeData()
     }
 }

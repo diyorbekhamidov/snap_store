@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import com.bounce.snapstore.databinding.FragmentProfileBinding
 import kotlin.system.exitProcess
@@ -29,6 +33,24 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.profileScreenLinearLayout) { view, insets ->
+
+            val systemBarInsets =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+
+            view.setPadding(
+                systemBarInsets.left,
+                systemBarInsets.top,
+                systemBarInsets.right,
+                systemBarInsets.bottom,
+            )
+
+            view.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = systemBarInsets.bottom + (systemBarInsets.bottom / 2)
+            }
+            insets
+        }
 
         binding.btnQuit.setOnClickListener {
             exitProcess(0)

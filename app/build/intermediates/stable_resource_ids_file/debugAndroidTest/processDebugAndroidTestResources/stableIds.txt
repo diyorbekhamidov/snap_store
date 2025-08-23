@@ -1,0 +1,2 @@
+com.bounce.snapstore.test:style/WhiteBackgroundTheme = 0x7f010001
+com.bounce.snapstore.test:style/WhiteBackgroundDialogTheme = 0x7f010000

@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,26 +19,48 @@ import com.bounce.snapstore.databinding.FragmentSearchBinding
 import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.presentation.adapter.ProductAdapter
-import com.bounce.snapstore.presentation.vm.SearchViewModel
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
-    private var binding: FragmentSearchBinding? = null
+    private var _binding: FragmentSearchBinding? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var searchViewModel: SearchViewModel
+    private lateinit var searchViewModel: SearchViewModel
     private lateinit var adapter: ProductAdapter
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
-
         (activity?.application as MyApplication).networkComponent.inject(this)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.searchScreenLinearLayout) { view, insets ->
+
+            val systemBarInsets =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+
+            view.setPadding(
+                systemBarInsets.left,
+                systemBarInsets.top,
+                systemBarInsets.right,
+                systemBarInsets.bottom,
+            )
+
+            binding.searchView.updateLayoutParams<MarginLayoutParams> {
+                topMargin = systemBarInsets.top
+            }
+
+            view.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = systemBarInsets.bottom + (systemBarInsets.bottom / 2)
+            }
+            insets
+        }
+
         searchViewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
 
         searchViewModel.getProductsLiveData().observe(viewLifecycleOwner) {
@@ -42,8 +68,9 @@ class SearchFragment : Fragment() {
             when {
                 it.isSuccess -> {
                     adapter = ProductAdapter(it.getOrNull() ?: emptyList(), itemClickListener)
-                    binding?.apply {
-                        searchProductsLayout.isVisible = true
+                    binding.apply {
+                        searchScreenNestedScrollView.isVisible = true
+                        searchView.isVisible = true
                         progress.isVisible = false
                         searchProductsRv.adapter = adapter
                     }
@@ -51,8 +78,8 @@ class SearchFragment : Fragment() {
 
                 it.isFailure -> {
                     if (!NetworkHelper.isNetworkConnected(requireContext())) {
-                        binding?.apply {
-                            searchProductsLayout.isVisible = true
+                        binding.apply {
+                            searchScreenNestedScrollView.isVisible = true
                             progress.isVisible = false
                             Toast.makeText(
                                 requireContext(),
@@ -66,10 +93,10 @@ class SearchFragment : Fragment() {
             }
         }
 
-        return binding!!.root
+        return binding.root
     }
 
-    val itemClickListener = object : ProductAdapter.ItemClickListener {
+    private val itemClickListener = object : ProductAdapter.ItemClickListener {
         override fun onClick(productData: ProductData) {
             val b = Bundle()
             b.putInt("product_id", productData.id)
@@ -81,7 +108,7 @@ class SearchFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
     override fun onResume() {

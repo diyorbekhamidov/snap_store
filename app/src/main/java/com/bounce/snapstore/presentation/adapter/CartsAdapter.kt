@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 
 class CartsAdapter(
     private val cartsList: Pair<List<ProductCartData>, List<ProductData>>,
-    val itemCLickListener: ItemClickListener
+    private val itemCLickListener: ItemClickListener
 ) :
     RecyclerView.Adapter<CartsAdapter.Vh>() {
 

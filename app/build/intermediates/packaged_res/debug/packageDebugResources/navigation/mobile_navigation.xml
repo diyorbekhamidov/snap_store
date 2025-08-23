@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.bounce.snapstore.presentation.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_product"
+            app:destination="@id/navigation_product" />
+        <action
+            android:id="@+id/action_navigation_home_to_failureFragment"
+            app:destination="@id/navigation_failure" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.bounce.snapstore.presentation.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_product"
+            app:destination="@id/navigation_product" />
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_failure"
+            app:destination="@id/navigation_failure" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_carts"
+        android:name="com.bounce.snapstore.presentation.ui.carts.CartsFragment"
+        android:label="Carts"
+        tools:layout="@layout/fragment_carts" >
+        <action
+            android:id="@+id/action_navigation_carts_to_navigation_product"
+            app:destination="@id/navigation_product" />
+        <action
+            android:id="@+id/action_navigation_carts_to_navigation_failure"
+            app:destination="@id/navigation_failure" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.bounce.snapstore.presentation.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_product"
+        android:name="com.bounce.snapstore.presentation.ui.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/navigation_failure"
+        android:name="com.bounce.snapstore.presentation.ui.failure.FailureFragment"
+        android:label="fragment_failure"
+        tools:layout="@layout/fragment_failure" />
+</navigation>

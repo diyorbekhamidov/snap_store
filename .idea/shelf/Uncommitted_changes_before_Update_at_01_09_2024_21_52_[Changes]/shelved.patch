@@ -1,0 +1,72 @@
+Index: app/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/.gitignore b/app/.gitignore
+new file mode 100644
+--- /dev/null	(date 1723896355206)
++++ b/app/.gitignore	(date 1723896355206)
+@@ -0,0 +1,1 @@
++/build
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024_21_49_[Changes]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024_21_49_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024_21_49_[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1725209369172)
++++ b/.idea/shelf/Uncommitted_changes_before_Update_at_01_09_2024_21_49_[Changes]/shelved.patch	(date 1725209369172)
+@@ -0,0 +1,25 @@
++Index: .idea/.gitignore
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/.gitignore b/.idea/.gitignore
++new file mode 100644
++--- /dev/null	(date 1723896365380)
+++++ b/.idea/.gitignore	(date 1723896365380)
++@@ -0,0 +1,3 @@
+++# Default ignored files
+++/shelf/
+++/workspace.xml
++Index: .idea/.name
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/.name b/.idea/.name
++new file mode 100644
++--- /dev/null	(date 1723896390684)
+++++ b/.idea/.name	(date 1723896390684)
++@@ -0,0 +1,1 @@
+++Snap Store
++\ No newline at end of file
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+--- /dev/null	(date 1723896351745)
++++ b/.gitignore	(date 1723896351745)
+@@ -0,0 +1,15 @@
++*.iml
++.gradle
++/local.properties
++/.idea/caches
++/.idea/libraries
++/.idea/modules.xml
++/.idea/workspace.xml
++/.idea/navEditor.xml
++/.idea/assetWizardSettings.xml
++.DS_Store
++/build
++/captures
++.externalNativeBuild
++.cxx
++local.properties

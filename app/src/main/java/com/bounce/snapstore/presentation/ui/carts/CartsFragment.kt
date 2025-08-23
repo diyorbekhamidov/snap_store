@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,7 +19,6 @@ import com.bounce.snapstore.databinding.FragmentCartsBinding
 import com.bounce.snapstore.domain.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.presentation.adapter.CartsAdapter
-import com.bounce.snapstore.presentation.vm.CartsViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
@@ -25,15 +28,34 @@ class CartsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var cartsViewModel: CartsViewModel
+    private lateinit var cartsViewModel: CartsViewModel
     private lateinit var binding: FragmentCartsBinding
     private lateinit var cartsAdapter: CartsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCartsBinding.inflate(inflater, container, false)
         (requireActivity().application as MyApplication).networkComponent.inject(this)
+        binding = FragmentCartsBinding.inflate(inflater, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.cartsMainLayout) { view, insets ->
+
+            val systemBarInsets =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+
+            view.setPadding(
+                systemBarInsets.left,
+                systemBarInsets.top,
+                systemBarInsets.right,
+                systemBarInsets.bottom,
+            )
+
+            view.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = systemBarInsets.bottom + (systemBarInsets.bottom / 2)
+            }
+            insets
+        }
+
         cartsViewModel = ViewModelProvider(this, viewModelFactory)[CartsViewModel::class.java]
 
 
@@ -48,7 +70,7 @@ class CartsFragment : Fragment() {
             when {
 
                 it.isSuccess -> {
-                    binding.progressCarts.isVisible = false
+                    binding.progress.isVisible = false
                     binding.cartsMainLayout.isVisible = true
                     cartsAdapter = CartsAdapter(it.getOrNull()!!, itemClickListener)
                     binding.productCartsRv.adapter = cartsAdapter
@@ -62,7 +84,7 @@ class CartsFragment : Fragment() {
                             "Something went wrong ${it.exceptionOrNull()?.message}",
                             Toast.LENGTH_SHORT
                         ).show()
-                        binding.progressCarts.isVisible = false
+                        binding.progress.isVisible = false
                         binding.cartsMainLayout.isVisible = true
                         findNavController().navigate(R.id.navigation_failure)
                     }
@@ -77,7 +99,7 @@ class CartsFragment : Fragment() {
         return binding.root
     }
 
-    val itemClickListener = object : CartsAdapter.ItemClickListener {
+    private val itemClickListener = object : CartsAdapter.ItemClickListener {
         override fun onClick(productData: ProductData) {
             val b = Bundle()
             b.putInt("product_id", productData.id)

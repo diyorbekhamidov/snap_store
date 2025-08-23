@@ -23,8 +23,6 @@ out/
 *.temp
 
 # APK / AAB build outputs
-*.apk
-*.ap_
 *.aab
 
 # Keystore files

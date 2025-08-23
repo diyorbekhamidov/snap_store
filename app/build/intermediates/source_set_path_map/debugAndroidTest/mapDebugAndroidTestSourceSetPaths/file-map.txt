@@ -1,6 +1,0 @@
-com.bounce.snapstore.test.app-core-1.6.1-0 C:\Users\Sky\.gradle\caches\8.9\transforms\8bcd7c0ee9c230182b7b2aa71dd2c245\transformed\core-1.6.1\res
-com.bounce.snapstore.test.app-tracing-1.2.0-1 C:\Users\Sky\.gradle\caches\8.9\transforms\ab43231b2f94cf61120539689560b03b\transformed\tracing-1.2.0\res
-com.bounce.snapstore.test.app-androidTest-2 F:\Dasturlash android\SnapStore\app\build\generated\res\resValues\androidTest\debug
-com.bounce.snapstore.test.app-mergeDebugAndroidTestResources-3 F:\Dasturlash android\SnapStore\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.bounce.snapstore.test.app-mergeDebugAndroidTestResources-4 F:\Dasturlash android\SnapStore\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.bounce.snapstore.test.app-debugAndroidTest-5 F:\Dasturlash android\SnapStore\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

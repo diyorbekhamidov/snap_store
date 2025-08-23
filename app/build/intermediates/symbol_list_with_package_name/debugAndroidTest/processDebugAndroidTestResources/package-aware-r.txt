@@ -1,3 +1,0 @@
-com.bounce.snapstore.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

@@ -1,6 +1,6 @@
-# About
+# About 💡
 A prototype of shopping app with a modern, user-friendly design and fake API integration for product browsing and cart management.
-### Used Technologies
+### Used Technologies 📀
 Kotlin, Clean Architecture, MVVM, RxJava, Retrofit, Dagger2 
 
 ### Screenshots
@@ -16,8 +16,9 @@ Kotlin, Clean Architecture, MVVM, RxJava, Retrofit, Dagger2
   </video>
 </div>
 
-# Download SnapStore APK file
-
+## Download SnapStore APK file
 ![AppIcon](app/src/main/res/mipmap-xhdpi/ic_launcher.webp)
 
-[Download APK](apk/snap-store-release.apk)
+[👉 Download APK](apk/SnapStore.apk?raw=true)
+
+

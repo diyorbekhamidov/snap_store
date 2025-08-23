@@ -1,3 +1,6 @@
+#About
+A prototype of shopping app with a modern, user-friendly design and fake API integration for product browsing and cart management.
+
 # Used Technologies
 Kotlin, Clean Architecture, MVVM, RxJava, Retrofit, Dagger2 
 

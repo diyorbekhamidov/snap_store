@@ -1,8 +1,12 @@
-# SnapStore app download from Play Store 
-[![Play Store](https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg)](https://play.google.com/store/apps/details?id=com.bounce.snapstore) 
+# Used Technologies
+Kotlin, Clean Architecture, MVVM, RxJava, Retrofit, Dagger2 
 
+
+# Download SnapStore APK file
 
 ![AppIcon](app/src/main/res/mipmap-xhdpi/ic_launcher.webp)
+
+[Download APK](apk/snap-store-release.apk)
 
 ## Screenshots
 

@@ -1,0 +1,56 @@
+# ======================================
+# Android Project .gitignore
+# ======================================
+
+# Gradle build
+.gradle/
+build/
+**/build/
+
+# Local configuration
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Log and temp files
+*.log
+*.cache
+*.temp
+
+# APK / AAB build outputs
+*.apk
+*.ap_
+*.aab
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google / Firebase
+google-services.json
+app/google-services.json
+secrets.xml
+*.env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# ==========================
+obj/
+.externalNativeBuild/
+.cxx/
+
+# ==========================
+# JetBrains
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml

@@ -1,6 +1,7 @@
 package com.bounce.snapstore.presentation.ui.product
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,13 @@ import androidx.navigation.fragment.findNavController
 import com.bounce.snapstore.MyApplication
 import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentProductBinding
-import com.bounce.snapstore.domain.NetworkHelper
+import com.bounce.snapstore.utils.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 class ProductFragment : Fragment() {
+    private val TAG = "ProductFragment"
     private var ARG_PARAM1: String = "product_id"
     private var param1: Int? = null
     private lateinit var productData: ProductData
@@ -59,7 +61,6 @@ class ProductFragment : Fragment() {
         }
 
         productViewModel = ViewModelProvider(this, viewModelFactory)[ProductViewModel::class.java]
-
 
         //Back btn
         binding.backBtn.backBtn.setOnClickListener {
@@ -102,8 +103,6 @@ class ProductFragment : Fragment() {
 
         }
 
-
-
         return binding.root
     }
 
@@ -120,8 +119,10 @@ class ProductFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        productViewModel.fetchProductData(param1 ?: 1)
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+        binding.root.removeAllViews()
+        param1 = null
     }
 }

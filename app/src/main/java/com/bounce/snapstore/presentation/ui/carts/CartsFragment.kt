@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.bounce.snapstore.MyApplication
 import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentCartsBinding
-import com.bounce.snapstore.domain.NetworkHelper
+import com.bounce.snapstore.utils.NetworkHelper
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.presentation.adapter.CartsAdapter
 import com.google.android.material.snackbar.BaseTransientBottomBar

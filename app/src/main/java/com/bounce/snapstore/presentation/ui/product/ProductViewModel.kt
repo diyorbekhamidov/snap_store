@@ -10,11 +10,13 @@ import javax.inject.Inject
 
 class ProductViewModel @Inject constructor(val productUseCase: ProductUseCase) : ViewModel() {
 
-    private val productLiveData = MutableLiveData<Result<ProductData>>()
+    private var productLiveData = MutableLiveData<Result<ProductData>>()
 
 
     fun fetchProductData(id: Int) {
-        val d = productUseCase.getProductById(id).subscribeOn(Schedulers.io())
+        productLiveData = MutableLiveData<Result<ProductData>>()
+        val d = productUseCase.getProductById(id)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 productLiveData.postValue(Result.success(it))

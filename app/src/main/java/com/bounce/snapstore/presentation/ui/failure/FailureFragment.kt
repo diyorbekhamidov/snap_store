@@ -11,7 +11,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bounce.snapstore.databinding.FragmentFailureBinding
-import com.bounce.snapstore.domain.NetworkHelper
+import com.bounce.snapstore.utils.NetworkHelper
 import com.google.android.material.snackbar.Snackbar
 
 private const val ARG_PARAM1 = "param1"

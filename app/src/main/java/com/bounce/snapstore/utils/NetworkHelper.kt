@@ -1,4 +1,4 @@
-package com.bounce.snapstore.domain
+package com.bounce.snapstore.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

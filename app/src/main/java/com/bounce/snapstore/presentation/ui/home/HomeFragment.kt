@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bounce.snapstore.MyApplication
 import com.bounce.snapstore.R
 import com.bounce.snapstore.databinding.FragmentHomeBinding
-import com.bounce.snapstore.domain.NetworkHelper
+import com.bounce.snapstore.utils.NetworkHelper
 import com.bounce.snapstore.domain.model.CategoryData
 import com.bounce.snapstore.domain.model.ProductData
 import com.bounce.snapstore.domain.model.SalesData
@@ -117,7 +117,6 @@ class HomeFragment : Fragment() {
             })
 
         }
-
 
         return root
     }
